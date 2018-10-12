@@ -8,6 +8,8 @@ public class ArmyUnit : MonoBehaviour {
     private float moveSpeed;
     [SerializeField]
     private float attackRange;
+    [SerializeField]
+    private ProgAnimatorAbstract attackAnimator;
 
     [HideInInspector]
     public ArmyManager allyManager;
@@ -47,6 +49,10 @@ public class ArmyUnit : MonoBehaviour {
             transform.position += new Vector3(moveDist * moveDir, 0f, 0f);
             distFromSpawn += moveDist;
             distFromEnemySpawn -= moveDist;
+        }
+        else
+        {
+            attackAnimator.Play();
         }
     }
 
