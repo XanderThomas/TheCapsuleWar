@@ -49,10 +49,14 @@ public class ArmyUnit : MonoBehaviour {
             transform.position += new Vector3(moveDist * moveDir, 0f, 0f);
             distFromSpawn += moveDist;
             distFromEnemySpawn -= moveDist;
+
+            if(attackAnimator)
+                attackAnimator.Stop();
         }
         else
         {
-            attackAnimator.Play();
+            if(attackAnimator)
+                attackAnimator.Play();
         }
     }
 
