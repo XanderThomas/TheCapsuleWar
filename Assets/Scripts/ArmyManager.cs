@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ResourceManager))]
 public class ArmyManager : MonoBehaviour {
 
     [SerializeField]
