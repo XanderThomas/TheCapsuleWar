@@ -14,6 +14,8 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
     private Vector3 swingAxis;
     [SerializeField]
     private float swingAngle;
+    [SerializeField]
+    private DamageTrigger swordScript;
 
     private Vector3 initialAngle;
     private bool swingBack;
@@ -27,6 +29,11 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
         animationLength = (swingAngle * 2.1f) / swingSpeed;
     }
 
+    private void Awake()
+    {
+        swordScript.doingDamage = false;
+    }
+
     public override void Play()
     {
         if (!Playing)
@@ -35,6 +42,7 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
             swingBack = false;
             angleAccumulator = 0f;
             swingDir = 1f;
+            swordScript.doingDamage = true;
         }
 
         base.Play();
@@ -64,6 +72,13 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
                 Stop();
             }
         }
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+
+        swordScript.doingDamage = false;
     }
 
 }

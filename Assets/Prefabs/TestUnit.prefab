@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4596043099427798}
+  - component: {fileID: 114095429343252654}
   - component: {fileID: 33022701009388038}
   - component: {fileID: 23486728265508502}
   - component: {fileID: 65720014983569010}
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296769714202714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7602546, y: 1, z: -9.849926}
+  m_LocalPosition: {x: 0.22407143, y: 1, z: -4.61942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4596043099427798}
@@ -196,11 +197,25 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160368672534224}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 100, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114095429343252654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160368672534224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2415792a6e5aa6043bd8b84e170212b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageOnHit: 10
+  doingDamage: 0
+  targetTag: 
 --- !u!114 &114327428338755990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f670f12fbe0f15343b6a1b8802bf86d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 20
   moveSpeed: 9
   attackRange: 1.1
   attackAnimator: {fileID: 114530711266280842}
@@ -235,6 +251,7 @@ MonoBehaviour:
   swingSpeed: 500
   swingAxis: {x: 1, y: 0, z: 0}
   swingAngle: 90
+  swordScript: {fileID: 114095429343252654}
 --- !u!136 &136211642355200758
 CapsuleCollider:
   m_ObjectHideFlags: 1

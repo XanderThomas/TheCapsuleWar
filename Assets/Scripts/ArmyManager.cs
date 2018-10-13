@@ -12,11 +12,14 @@ public class ArmyManager : MonoBehaviour {
     private ArmyManager enemyArmyManager;
     [SerializeField]
     private float spawnZRange;
+    [SerializeField]
+    private string enemyTeamUnitTag;
 
     //armyFront is distance from spawn, not a global space position
     public float armyFront { get; private set; }
     //unitStartX is a global space position
     public float unitStartX { get; private set; }
+    public string EnemyTeamUnitTag { get { return enemyTeamUnitTag; } }
 
     private List<ArmyUnit> units = new List<ArmyUnit>();
 

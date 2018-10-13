@@ -5,6 +5,8 @@ using UnityEngine;
 public class ArmyUnit : MonoBehaviour {
 
     [SerializeField]
+    private float maxHP;
+    [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float attackRange;
@@ -20,12 +22,14 @@ public class ArmyUnit : MonoBehaviour {
     public float distFromEnemySpawn { get; private set; }
 
     private float moveDir;
+    private float hp;
 
 
 
     private void Start()
     {
         distFromSpawn = 0f;
+        hp = maxHP;
 
         Vector3 pos = transform.position;
         if(enemyManager.unitStartX > pos.x)
@@ -58,6 +62,14 @@ public class ArmyUnit : MonoBehaviour {
             if(attackAnimator)
                 attackAnimator.Play();
         }
+    }
+
+    public void TakeDamage(float amt)
+    {
+        hp -= amt;
+
+        if (hp <= 0)
+            Destroy(gameObject);
     }
 
 }
