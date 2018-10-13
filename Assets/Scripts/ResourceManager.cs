@@ -25,6 +25,24 @@ public class ResourceManager : MonoBehaviour {
         AlterResourceStore(productionRate);
     }
 
+    /// <summary>
+    /// Subtract resources if they are available
+    /// </summary>
+    /// <param name="amt">The amount of resources to attempt to subtract</param>
+    /// <returns>True if successful, false if insufficient resources to spend</returns>
+    public bool SpendResources(ResourceTypes amt)
+    {
+        if (amt.gold > resources.gold
+         || amt.wood > resources.wood
+         || amt.iron > resources.iron)
+            return false;
+        else
+        {
+            AlterResourceStore(-amt);
+            return true;
+        }
+    }
+
     private void AlterResourceStore(ResourceTypes amt)
     {
         resources += amt;

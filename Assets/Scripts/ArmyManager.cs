@@ -5,6 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(ResourceManager))]
 public class ArmyManager : MonoBehaviour {
 
+    [System.Serializable]
+    public struct ArmySpawn
+    {
+        public ResourceTypes cost;
+        public GameObject prefab;
+    }
+
+    [SerializeField]
+    private ArmySpawn[] spawnableUnits;
     [SerializeField]
     private Transform spawn;
     [SerializeField]
@@ -15,6 +24,8 @@ public class ArmyManager : MonoBehaviour {
     private float spawnZRange;
     [SerializeField]
     private string teamUnitTag;
+    [SerializeField]
+    private ResourceManager resourceManager;
 
     //armyFront is distance from spawn, not a global space position
     public float armyFront { get; private set; }
@@ -26,31 +37,16 @@ public class ArmyManager : MonoBehaviour {
 
 
 
-
+    
 
     private void Awake()
     {
         unitStartX = spawn.position.x;
-        
-        InvokeRepeating("TEMP_SpawnUnit", 0.1f, 2f);
-    }
 
-    private void TEMP_SpawnUnit()
-    {
-        GameObject unit = Instantiate(tempTestUnitPrefab);
-        Vector3 spawnPos = spawn.position;
-        spawnPos.z += Random.Range(-spawnZRange, spawnZRange);
-        unit.transform.position = spawnPos;
-        unit.transform.rotation = spawn.rotation;
-        unit.tag = teamUnitTag;
-        
-        ArmyUnit script = unit.GetComponent<ArmyUnit>();
-        script.allyManager = this;
-        script.enemyManager = enemyArmyManager;
-
-        script.Initialize();
-
-        units.Add(script);
+#if DEBUG
+        if (!resourceManager)
+            Debug.LogError("ArmyManager " + gameObject.name + " resourceManager not set!");
+#endif
     }
 
     private void Update()
@@ -72,6 +68,38 @@ public class ArmyManager : MonoBehaviour {
     {
         units.Remove(unit);
         Destroy(unit.gameObject);
+    }
+
+    public bool BuyUnit(int idx)
+    {
+        if (resourceManager.SpendResources(spawnableUnits[idx].cost))
+        {
+            SpawnUnit(idx);
+
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private void SpawnUnit(int idx)
+    {
+        GameObject unit = Instantiate(spawnableUnits[idx].prefab);
+
+        Vector3 spawnPos = spawn.position;
+        spawnPos.z += Random.Range(-spawnZRange, spawnZRange);
+
+        unit.transform.position = spawnPos;
+        unit.transform.rotation = spawn.rotation;
+        unit.tag = teamUnitTag;
+
+        ArmyUnit script = unit.GetComponent<ArmyUnit>();
+        script.allyManager = this;
+        script.enemyManager = enemyArmyManager;
+
+        script.Initialize();
+
+        units.Add(script);
     }
 
 }

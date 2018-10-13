@@ -522,12 +522,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad92854176d41014ca0fe198af9b7d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnableUnits:
+  - cost:
+      gold: 10
+      wood: 0
+      iron: 0
+    prefab: {fileID: 1296769714202714, guid: a580c47bacb6dea4eaf86695902701ec, type: 2}
   spawn: {fileID: 701712799}
   tempTestUnitPrefab: {fileID: 1296769714202714, guid: a580c47bacb6dea4eaf86695902701ec,
     type: 2}
   enemyArmyManager: {fileID: 1754900001}
   spawnZRange: 4
   teamUnitTag: Team2Damagable
+  resourceManager: {fileID: 0}
 --- !u!4 &1059287244
 Transform:
   m_ObjectHideFlags: 0
@@ -681,12 +688,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad92854176d41014ca0fe198af9b7d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnableUnits:
+  - cost:
+      gold: 10
+      wood: 0
+      iron: 0
+    prefab: {fileID: 1296769714202714, guid: a580c47bacb6dea4eaf86695902701ec, type: 2}
   spawn: {fileID: 2035581543}
   tempTestUnitPrefab: {fileID: 1296769714202714, guid: a580c47bacb6dea4eaf86695902701ec,
     type: 2}
   enemyArmyManager: {fileID: 1059287243}
   spawnZRange: 4
   teamUnitTag: Team1Damagable
+  resourceManager: {fileID: 0}
 --- !u!4 &1754900002
 Transform:
   m_ObjectHideFlags: 0
