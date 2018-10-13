@@ -30,7 +30,7 @@ public class ArmyManager : MonoBehaviour {
     private void Awake()
     {
         unitStartX = spawn.position.x;
-
+        
         InvokeRepeating("TEMP_SpawnUnit", 0.1f, 2f);
     }
 
@@ -42,7 +42,7 @@ public class ArmyManager : MonoBehaviour {
         unit.transform.position = spawnPos;
         unit.transform.rotation = spawn.rotation;
         unit.tag = teamUnitTag;
-
+        
         ArmyUnit script = unit.GetComponent<ArmyUnit>();
         script.allyManager = this;
         script.enemyManager = enemyArmyManager;
