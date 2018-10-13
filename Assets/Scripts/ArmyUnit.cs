@@ -12,6 +12,8 @@ public class ArmyUnit : MonoBehaviour {
     private float attackRange;
     [SerializeField]
     private ProgAnimatorAbstract attackAnimator;
+    [SerializeField]
+    private WeaponAbstract weapon;
 
     [HideInInspector]
     public ArmyManager allyManager;
@@ -26,13 +28,15 @@ public class ArmyUnit : MonoBehaviour {
 
 
 
-    private void Start()
+    public void Initialize()
     {
         distFromSpawn = 0f;
         hp = maxHP;
 
+        weapon.targetTag = enemyManager.TeamUnitTag;
+
         Vector3 pos = transform.position;
-        if(enemyManager.unitStartX > pos.x)
+        if (enemyManager.unitStartX > pos.x)
         {
             distFromEnemySpawn = enemyManager.unitStartX - pos.x;
             moveDir = 1f;
@@ -69,7 +73,10 @@ public class ArmyUnit : MonoBehaviour {
         hp -= amt;
 
         if (hp <= 0)
-            Destroy(gameObject);
+        {
+            attackAnimator.Stop();
+            allyManager.KillUnit(this);
+        }
     }
 
 }

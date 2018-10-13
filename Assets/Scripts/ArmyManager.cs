@@ -13,13 +13,13 @@ public class ArmyManager : MonoBehaviour {
     [SerializeField]
     private float spawnZRange;
     [SerializeField]
-    private string enemyTeamUnitTag;
+    private string teamUnitTag;
 
     //armyFront is distance from spawn, not a global space position
     public float armyFront { get; private set; }
     //unitStartX is a global space position
     public float unitStartX { get; private set; }
-    public string EnemyTeamUnitTag { get { return enemyTeamUnitTag; } }
+    public string TeamUnitTag { get { return teamUnitTag; } }
 
     private List<ArmyUnit> units = new List<ArmyUnit>();
 
@@ -41,10 +41,13 @@ public class ArmyManager : MonoBehaviour {
         spawnPos.z += Random.Range(-spawnZRange, spawnZRange);
         unit.transform.position = spawnPos;
         unit.transform.rotation = spawn.rotation;
+        unit.tag = teamUnitTag;
 
         ArmyUnit script = unit.GetComponent<ArmyUnit>();
         script.allyManager = this;
         script.enemyManager = enemyArmyManager;
+
+        script.Initialize();
 
         units.Add(script);
     }
@@ -62,6 +65,12 @@ public class ArmyManager : MonoBehaviour {
         }
 
         armyFront = furthestUnitDist;
+    }
+
+    public void KillUnit(ArmyUnit unit)
+    {
+        units.Remove(unit);
+        Destroy(unit.gameObject);
     }
 
 }
