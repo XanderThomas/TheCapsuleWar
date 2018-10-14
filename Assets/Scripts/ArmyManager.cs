@@ -70,6 +70,15 @@ public class ArmyManager : MonoBehaviour {
         Destroy(unit.gameObject);
     }
 
+    /// <summary>
+    /// BuyUnit but without a return so it's selectable in the Unity Inspector
+    /// </summary>
+    /// <param name="idx">Index of unit in spawnableUnits array</param>
+    public void BuyUnitUI(int idx)
+    {
+        BuyUnit(idx);
+    }
+
     public bool BuyUnit(int idx)
     {
         if (resourceManager.SpendResources(spawnableUnits[idx].cost))

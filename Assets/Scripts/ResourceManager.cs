@@ -13,6 +13,11 @@ public class ResourceManager : MonoBehaviour {
     [SerializeField, Tooltip("The time in seconds between resource increases\nRecommend leave at 1")]
     private float productionInterval = 1f;
 
+    public ResourceTypes Resources { get { return resources; } }
+    public ResourceTypes ResourceCapacity { get { return resourceCapacity; } }
+    public ResourceTypes ProductionRate { get { return productionRate; } }
+    public float ProductionInterval { get { return productionInterval; } }
+
 
 
     private void Awake()
