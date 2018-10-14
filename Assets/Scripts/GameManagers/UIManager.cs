@@ -10,6 +10,13 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private ResourceManager playerResourceManager;
 
+    [Header("Settings")]
+
+    [SerializeField]
+    private string playerWinText;
+    [SerializeField]
+    private string enemyWinText;
+
     [Header("UI elements")]
 
     [SerializeField]
@@ -33,7 +40,15 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private RectTransform ironBarHolder;
 
+    [SerializeField]
+    private Text gameOverText;
 
+
+
+    private void Awake()
+    {
+        gameOverText.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -51,6 +66,16 @@ public class UIManager : MonoBehaviour {
         ironText.text = "Iron: " + resources.iron;
         ironBar.offsetMax = new Vector2(-ironBarHolder.sizeDelta.x +
             (resources.iron / (float)resourceCapacity.iron) * ironBarHolder.sizeDelta.x, 0f);
+    }
+
+    public void DisplayGameOver(bool playerWins)
+    {
+        gameOverText.gameObject.SetActive(true);
+
+        if (playerWins)
+            gameOverText.text = playerWinText;
+        else
+            gameOverText.text = enemyWinText;
     }
 
 }

@@ -8,10 +8,10 @@ public abstract class DamagableAbstract : MonoBehaviour {
 
     [SerializeField, Tooltip("The maximum health points this unit can have, the amount it will start with")]
     protected float maxHP;
-    [SerializeField, Tooltip("The speed this unit will advance towards the enemy in m/s")]
-    protected float moveSpeed;
 
     protected float hp;
+
+    public float HP { get { return hp; } }
 
 
 

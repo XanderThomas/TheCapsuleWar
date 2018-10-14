@@ -11,6 +11,8 @@ public class ArmyUnit : DamagableAbstract {
 
     [SerializeField, Tooltip("The distance from the enemy line this unit will stop at and begin attacking, in meters")]
     private float attackRange;
+    [SerializeField, Tooltip("The speed this unit will advance towards the enemy in m/s")]
+    protected float moveSpeed;
 
     [Header("Links")]
 
