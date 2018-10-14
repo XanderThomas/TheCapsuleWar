@@ -5,14 +5,10 @@ using UnityEngine;
 /// <summary>
 /// Controller script which handles combat units' hp, movement & attack animations
 /// </summary>
-public class ArmyUnit : MonoBehaviour {
+public class ArmyUnit : DamagableAbstract {
 
     [Header("Settings")]
 
-    [SerializeField, Tooltip("The maximum health points this unit can have, the amount it will start with")]
-    private float maxHP;
-    [SerializeField, Tooltip("The speed this unit will advance towards the enemy in m/s")]
-    private float moveSpeed;
     [SerializeField, Tooltip("The distance from the enemy line this unit will stop at and begin attacking, in meters")]
     private float attackRange;
 
@@ -33,7 +29,6 @@ public class ArmyUnit : MonoBehaviour {
 
     //Either 1f or -1f to move the unit towards either the left or right base
     private float moveDir;
-    private float hp;
 
 
 
@@ -43,7 +38,6 @@ public class ArmyUnit : MonoBehaviour {
     public void Initialize()
     {
         distFromSpawn = 0f;
-        hp = maxHP;
         
         weapon.targetTag = enemyManager.TeamUnitTag;
         
@@ -89,17 +83,12 @@ public class ArmyUnit : MonoBehaviour {
     /// Causes the ArmyUnit to take damage and die if hp falls to or below 0
     /// </summary>
     /// <param name="amt">Quantity of damage to take, or negative value to heal</param>
-    public void TakeDamage(float amt)
+    public override void TakeDamage(float amt)
     {
-        hp -= amt;
+        base.TakeDamage(amt);
 
-        if (hp <= 0)
-        {
-            attackAnimator.Stop();
+        if (hp == 0)
             allyManager.KillUnit(this);
-        }
-        else if (hp > maxHP)
-            hp = maxHP;
     }
 
 }
