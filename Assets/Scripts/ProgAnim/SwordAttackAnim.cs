@@ -44,7 +44,7 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
             swingDir = 1f;
             swordScript.doingDamage = true;
         }
-
+        
         base.Play();
 
     }

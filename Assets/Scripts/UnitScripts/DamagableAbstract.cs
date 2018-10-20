@@ -9,14 +9,17 @@ public abstract class DamagableAbstract : MonoBehaviour {
     [SerializeField, Tooltip("The maximum health points this unit can have, the amount it will start with")]
     protected float maxHP;
 
+    //The variable for current HP
     protected float hp;
 
+    //The property for externally accessing current HP
     public float HP { get { return hp; } }
 
 
 
     private void Awake()
     {
+        //Set current HP to max HP when the object is created
         hp = maxHP;
     }
 
@@ -28,6 +31,7 @@ public abstract class DamagableAbstract : MonoBehaviour {
     {
         hp -= amt;
 
+        //Clamp current HP to the range 0 to maxHP
         if (hp < 0)
             hp = 0;
         else if (hp > maxHP)
