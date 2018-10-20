@@ -90,7 +90,10 @@ public class ArmyUnit : DamagableAbstract {
         base.TakeDamage(amt);
 
         if (hp == 0)
+        {
+            attackAnimator.Stop();
             allyManager.KillUnit(this);
+        }
     }
 
 }

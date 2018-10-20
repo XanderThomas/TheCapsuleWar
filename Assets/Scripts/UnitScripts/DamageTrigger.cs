@@ -13,7 +13,7 @@ public class DamageTrigger : WeaponAbstract {
     {
         if(other.gameObject.CompareTag(targetTag))
         {
-            other.GetComponent<ArmyUnit>().TakeDamage(damageOnHit);
+            other.GetComponent<DamagableAbstract>().TakeDamage(damageOnHit);
         }
     }
 

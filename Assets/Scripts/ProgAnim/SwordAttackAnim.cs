@@ -55,7 +55,7 @@ public class SwordAttackAnim : ProgAnimatorAbstract {
 
         float angleAdd = swingSpeed * dt;
         angleAccumulator += angleAdd;
-
+        
         sword.RotateAround(handlePoint.position, transform.TransformDirection(swingAxis), angleAdd * swingDir);
 
         if(angleAccumulator >= swingAngle)

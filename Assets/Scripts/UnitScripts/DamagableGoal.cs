@@ -14,7 +14,7 @@ public class DamagableGoal : DamagableAbstract {
     public override void TakeDamage(float amt)
     {
         base.TakeDamage(amt);
-
+        
         if (hp == 0)
             gameOverManager.EndGame(!playerGoal);
     }
