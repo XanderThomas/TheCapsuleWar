@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base class for things which take damage
+/// </summary>
 public abstract class DamagableAbstract : MonoBehaviour {
 
     [Header("DamagableAbstract Settings")]
