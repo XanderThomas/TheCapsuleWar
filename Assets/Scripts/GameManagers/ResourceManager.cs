@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manager for a team's resource stats
+/// </summary>
 public class ResourceManager : MonoBehaviour {
 
     [SerializeField, Tooltip("The current amount of resources stored")]
@@ -13,6 +16,7 @@ public class ResourceManager : MonoBehaviour {
     [SerializeField, Tooltip("The time in seconds between resource increases\nRecommend leave at 1")]
     private float productionInterval = 1f;
 
+    //Public accessors for privately managed variables & structs
     public ResourceTypes Resources { get { return resources; } }
     public ResourceTypes ResourceCapacity { get { return resourceCapacity; } }
     public ResourceTypes ProductionRate { get { return productionRate; } }
@@ -22,9 +26,13 @@ public class ResourceManager : MonoBehaviour {
 
     private void Awake()
     {
+        //Use InvokeRepeating to add resources regularly throughout game
         InvokeRepeating("ProduceResources", productionInterval, productionInterval);
     }
 
+    /// <summary>
+    /// Add resources equal to productionRate
+    /// </summary>
     private void ProduceResources()
     {
         AlterResourceStore(productionRate);
@@ -37,21 +45,29 @@ public class ResourceManager : MonoBehaviour {
     /// <returns>True if successful, false if insufficient resources to spend</returns>
     public bool SpendResources(ResourceTypes amt)
     {
+        //Check if there are enough resources to spend
         if (amt.gold > resources.gold
          || amt.wood > resources.wood
          || amt.iron > resources.iron)
             return false;
         else
         {
+            //Remove resources equal to amt
             AlterResourceStore(-amt);
             return true;
         }
     }
 
+    /// <summary>
+    /// Add and/or remove resources and clamp all their values from 0 to the appropriate resourceCapacity value
+    /// </summary>
+    /// <param name="amt">The amount of resources to add and/or remove</param>
     private void AlterResourceStore(ResourceTypes amt)
     {
+        //Add and/or remove resources
         resources += amt;
 
+        //Clamp all resource values from 0 to the appropriate resourceCapacity value
         if (resources.gold > resourceCapacity.gold)
             resources.gold = resourceCapacity.gold;
         else if (resources.gold < 0)
