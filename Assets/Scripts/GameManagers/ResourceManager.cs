@@ -59,6 +59,63 @@ public class ResourceManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// The ExpandResourceProduction function for UI use
+    /// </summary>
+    /// <param name="type">0 for gold, 1 for wood, 2 for iron</param>
+    public void ExpandResourceProductionUI(int type)
+    {
+        ExpandResourceProduction(type);
+    }
+
+    /// <summary>
+    /// Attempt to add half again to a resource type's capacity & production rate, for an amount of gold
+    /// </summary>
+    /// <param name="type">0 for gold, 1 for wood, 2 for iron</param>
+    /// <returns>True is successful, false if insufficient gold to spend</returns>
+    public bool ExpandResourceProduction(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                int halfGold = resourceCapacity.gold / 2;
+                if (resources.gold >= halfGold)
+                {
+                    resources.gold -= halfGold;
+                    resourceCapacity.gold += halfGold;
+                    productionRate.gold += productionRate.gold / 2;
+                    return true;
+                }
+                else
+                    return false;
+            case 1:
+                int halfWood = resourceCapacity.wood / 2;
+                if (resources.gold >= halfWood)
+                {
+                    resources.gold -= halfWood;
+                    resourceCapacity.wood += halfWood;
+                    productionRate.wood += productionRate.wood / 2;
+                    return true;
+                }
+                else
+                    return false;
+            case 2:
+                int halfIron = resourceCapacity.iron / 2;
+                if (resources.gold >= halfIron)
+                {
+                    resources.gold -= halfIron;
+                    resourceCapacity.iron += halfIron;
+                    productionRate.iron += productionRate.iron / 2;
+                    return true;
+                }
+                else
+                    return false;
+            default:
+                Debug.LogError("Invalid type given for ExpandResourceProduction, it must be 0, 1, or 2");
+                return false;
+        }
+    }
+
+    /// <summary>
     /// Add and/or remove resources and clamp all their values from 0 to the appropriate resourceCapacity value
     /// </summary>
     /// <param name="amt">The amount of resources to add and/or remove</param>
